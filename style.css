@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    background: darkgray;
+    /* No overflow for scrollbar */
+    overflow: hidden;
+    text-align: center;
+}
+
+#myCanvas {
+    background: lightgray;
+}
