@@ -30,6 +30,10 @@ class Car {
     }
 
     update() {
+        this.#move();
+    }
+
+    #move() {
         if(this.controls.forward) this.speed += this.acceleration;
         if(this.controls.reverse) this.speed -= this.acceleration;
         if(this.speed != 0) { // logic for backwards turns
