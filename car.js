@@ -16,23 +16,20 @@ class Car {
     }
 
     draw(ctx) {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(-this.angle);
         ctx.beginPath();
-        ctx.rect(
-            - this.width/2,
-            - this.height/2,
-            this.width,
-            this.height
-        );
+        ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
+        for (let i = 1; i < this.polygon.length; i++) {
+            ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
+        }
         ctx.fill();
-        ctx.restore();
+
         this.sensor.draw(ctx);
     }
 
+    // Main function for car
     update(roadBorders) {
         this.#move();
+        this.polygon = this.#createPolygon();
         this.sensor.update(roadBorders);
     }
 
@@ -55,5 +52,29 @@ class Car {
         if(this.speed < 0) this.speed += this.friction;
         
         if(Math.abs(this.speed) < this.friction) this.speed = 0; // edge case
+    }
+
+    #createPolygon() {
+        const points = [];
+        const radius = Math.hypot(this.width, this.height)/2;
+        const alphaAngle = Math.atan2(this.width, this.height);
+        // Top Right point start
+        points.push({
+            x: this.x - Math.sin(this.angle - alphaAngle) * radius,
+            y: this.y - Math.cos(this.angle - alphaAngle) * radius,
+        });
+        points.push({
+            x: this.x - Math.sin(this.angle + alphaAngle) * radius,
+            y: this.y - Math.cos(this.angle + alphaAngle) * radius,
+        });
+        points.push({
+            x: this.x - Math.sin(Math.PI + this.angle - alphaAngle) * radius,
+            y: this.y - Math.cos(Math.PI + this.angle - alphaAngle) * radius,
+        });
+        points.push({
+            x: this.x - Math.sin(Math.PI + this.angle + alphaAngle) * radius,
+            y: this.y - Math.cos(Math.PI + this.angle + alphaAngle) * radius,
+        });
+        return points;
     }
 }
