@@ -9,9 +9,13 @@ This application uses machine learning and artificial neural network to simulate
 ## Controls
 To manually control the car, use the `ArrowKeys`.
 
-## To Do:
-- Build collision detection
-- Simulate traffic
-- Apply neural network
-- Parallelization
-- Genetic algorithm
+## Progress Checklist
+
+| Feature                   | Status |
+|---------------------------|--------|
+| Build collision detection |   ✅   |
+| Add simulated traffic     |   ⏳   |
+| Apply neural network      |   ⏳   |
+| Add parallelization       |   ⏳   |
+| Add genetic algorithm     |   ⏳   |
+
