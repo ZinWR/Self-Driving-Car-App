@@ -20,15 +20,15 @@ Initially, the car is controlled by `ArrowKeys`. It later is controlled by `neur
 <div align="center">
     <div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
         <div style="text-align: center;">
-            <img alt="manualControl" src="demo_manual.gif" width="80%" height="auto">
+            <img alt="manualControl" src="demo_manual.gif" width="60%" height="auto">
             <p>Manual Control via Arrow Keys</p>
         </div>
         <div style="text-align: center;">
-            <img alt="demo_500N" src="demo_500N.gif" width="80%" height="auto">
+            <img alt="demo_500N" src="demo_500N.gif" width="60%" height="auto">
             <p>Running 500N test for best car & Save to Local Storage</p>
         </div>
         <div style="text-align: center;">
-            <img alt="demo_500N" src="demo_1N.gif" width="80%" height="auto">
+            <img alt="demo_500N" src="demo_1N.gif" width="60%" height="auto">
             <p>Final result with best run</p>
         </div>
     </div>
