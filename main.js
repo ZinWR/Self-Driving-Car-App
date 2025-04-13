@@ -75,6 +75,7 @@ function animate(time) {
 function generateCars(N) {
     const cars = [];
     for(let i = 1; i <= N; i++) {
+        // Manually control: 'KEYS' or AI control: 'AI'
         cars.push(new Car(road.getLaneCenter(1), 100, 30, 50, 'AI'));
     }
     return cars;
