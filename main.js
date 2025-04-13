@@ -1,41 +1,64 @@
+// Canvas
 const carCanvas = document.getElementById('carCanvas');
 carCanvas.width = 200;
 const networkCanvas = document.getElementById('networkCanvas');
 networkCanvas.width = 300;
-
+// Context
 const carCtx = carCanvas.getContext('2d');
 const networkCtx = networkCanvas.getContext('2d');
 const road = new Road(carCanvas.width/2, carCanvas.width * 0.9);
-const car = new Car(road.getLaneCenter(1), 100, 30, 50, 'AI');
+// Cars
+const N = 100;
+const cars = generateCars(N);
 const traffic = [
     new Car(road.getLaneCenter(1), -100, 30, 50, 'DUMMY', 2)
 ];
 
+// Main
 animate();
 
+// Functions
 function animate(time) {
-    // Canvas & Road
+    // Choose best car during parallelization
+    const bestCar = cars.find(car => car.y === Math.min(...cars.map(car => car.y)));
+
+    // Canvas, Road & Context
     carCanvas.height = window.innerHeight;
     networkCanvas.height = window.innerHeight;
-
     carCtx.save();
-    carCtx.translate(0, -car.y + carCanvas.height * 0.7);
+    carCtx.translate(0, -bestCar.y + carCanvas.height * 0.7);
     road.draw(carCtx);
 
     // Car & Traffic
     for(let i = 0; i < traffic.length; i++) {
         traffic[i].update(road.borders, []);
     }
-    car.update(road.borders, traffic);
-    
+    for(let i = 0; i < cars.length; i++) {
+        cars[i].update(road.borders, traffic);
+    }
     for(let i = 0; i < traffic.length; i++) {
         traffic[i].draw(carCtx, 'red');
     }
-    car.draw(carCtx, 'blue');
+    carCtx.globalAlpha = 0.2;
+    for(let i = 0; i < cars.length; i++) {
+        cars[i].draw(carCtx, 'blue');
+    }
+
+    carCtx.globalAlpha = 1;
+    bestCar.draw(carCtx, 'blue', true);
 
     carCtx.restore();
 
+    // Network visualization & Others
     networkCtx.lineDashOffset = -time/50;
-    Visualizer.drawNetwork(networkCtx, car.brain);
+    Visualizer.drawNetwork(networkCtx, bestCar.brain);
     requestAnimationFrame(animate);
+}
+
+function generateCars(N) {
+    const cars = [];
+    for(let i = 1; i <= N; i++) {
+        cars.push(new Car(road.getLaneCenter(1), 100, 30, 50, 'AI'));
+    }
+    return cars;
 }
