@@ -17,8 +17,8 @@ This application uses machine learning and artificial neural network to simulate
 | Build collision detection |   ✅   |
 | Add simulated traffic     |   ✅   |
 | Apply neural network      |   ✅   |
-| Add parallelization       |   ⏳   |
-| Add genetic algorithm     |   ⏳   |
+| Add parallelization       |   ✅   |
+| Add genetic algorithm     |   ✅   |
 
 ## Network Architecture & Controls
 Initially, the car is controlled by `ArrowKeys`. It later is controlled by `neural network` in form of movement array.

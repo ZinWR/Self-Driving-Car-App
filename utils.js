@@ -36,3 +36,17 @@ function polysIntersect(poly1, poly2) {
     }
     return false;
 }
+
+// Visualizer Color Customization
+function getRGBA(value) {
+    const alpha = Math.abs(value);
+    const colorPositive = [0, 200, 255];  // neon blue
+    const colorNegative = [255, 50, 150]; // neon red
+    const [R, G, B] = value >= 0 ? colorPositive : colorNegative;
+    return `rgba(${R}, ${G}, ${B}, ${alpha})`;
+}
+
+function getRandomColor() {
+    const hue = 290 + Math.random() * 260;
+    return `hsl(${hue}, 100%, 60%)`;
+}
